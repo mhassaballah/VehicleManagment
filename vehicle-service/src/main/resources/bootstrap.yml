@@ -1,0 +1,13 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: vehicle-service
+  cloud:
+    config:
+      uri: http://config-server:8051,http://localhost:8051
+      
+      
+jasypt:
+  encryptor:
+    password: altenpass@admin 

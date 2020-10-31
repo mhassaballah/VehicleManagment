@@ -1,0 +1,39 @@
+<div>
+<h4>Select Customer</h4>
+<select (change)="selectCustomer($event)">
+        <option  [value]="-1">--All--</option>
+        <option [value]="customer.customerId" *ngFor="let customer of customers">
+                {{customer.customerName}}
+        </option>
+</select>
+</div>
+<div>
+<mat-divider></mat-divider>
+</div>
+<div>
+    <div>
+        <h4>Connected Vehicles</h4>
+    </div>
+<div>
+<table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
+  [dtTrigger]="dtTrigger">
+    <thead>
+      <tr>
+          <th>Vehicle ID</th>
+          <th>Vehicle Registration Number</th>
+      </tr>
+  </thead>
+      <tbody *ngIf="vehicles?.length != 0">
+              <tr *ngFor="let vehicle of vehicles">
+          <td>{{ vehicle.vehicleId }}</td>
+          <td>{{ vehicle.registrationNumber }}</td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="vehicles?.length == 0">
+      <tr>
+          <td colspan="3" class="no-data-available">No data!</td>
+      </tr>
+  </tbody>
+</table>
+</div>
+</div>

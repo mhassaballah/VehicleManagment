@@ -1,0 +1,33 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: vehicle-simulator
+  cloud:
+    config:
+      uri: http://config-server:8051,http://localhost:8051
+  client:
+    config:
+      default:
+        connectTimeout: 180000000
+        readTimeout: 180000000 
+
+  hystrix:
+    enabled: true         
+management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+          
+hystrix:
+  command:
+    default:
+      execution.isolation.thread.timeoutInMilliseconds: 60000
+      circuitBreaker:
+        enabled: true
+        sleepWindowInMilliseconds: 300000
+      fallback.enabled: true 
+feign:
+  hystrix:
+    enabled: true

@@ -1,0 +1,113 @@
+version: '3.4'
+services:
+  config-server:
+    build: ./config-server
+    image: config-server
+    ports:
+      - '8051:8051'
+    networks:
+      - vehicle-bridge-subnet
+      
+# eureka-server:
+#   build: ./registry
+#   image: registry-server
+#   ports:
+#     - '8071:8071'
+#  environment:
+#      PROFILE: "default"
+#      CONFIGSERVER_URI: "http://config:8051"
+#      CONFIGSERVER_PORT:   "8051"
+#    depends_on:
+#     - config-server
+#      - zipkin-service  
+#          
+#    networks:
+#      - vehicle-bridge-subnet
+  gateway-service:
+    build: ./gateway-service
+    image: gateway-service
+    ports:
+      - '8040:8040'
+    environment:
+      PROFILE: "default"
+      CONFIG_PORT:   "8051"
+#     EUREKA_PORT:   "8071"
+      
+    depends_on:
+      - config-server
+ #     - eureka-server
+      - customer-service
+      - vehicle-service
+      - zipkin-service
+
+    networks:
+      - vehicle-bridge-subnet
+
+  customer-service:
+    build: ./customer-service
+    image: customer-service
+    ports:
+      - '8060:8060'
+    environment:
+      PROFILE: "default"
+      CONFIG_PORT:   "8051"
+ #    EUREKA_PORT:   "8071"
+    depends_on:
+      - config-server
+  #    - eureka-server
+      - zipkin-service
+    networks:
+      - vehicle-bridge-subnet
+  vehicle-service:
+    build: ./vehicle-service
+    image: vehicle-service
+    ports:
+      - '8091:8091'
+    environment:
+      PROFILE: "default"
+      CONFIG_PORT:   "8051"
+ #    EUREKA_PORT:   "8071"
+    depends_on:
+      - config-server
+  #    - eureka-server
+      - zipkin-service
+    networks:
+      - vehicle-bridge-subnet  
+  vehicle-simulator-service:
+    build: ./vehicle-simulator
+    image: vehicle-simulator
+    ports:
+      - '9090:9090'
+    environment:
+      PROFILE: "default"
+ #     EUREKA_PORT:   "8071"
+      CONFIG_PORT:   "8051"
+      VEHIICLE_PORT: "8091"
+    depends_on:
+      - config-server
+  #    - eureka-server
+      - vehicle-service
+      - zipkin-service
+  
+    networks:
+      - vehicle-bridge-subnet  
+    
+  vehicle-driver-web:
+    build: ./vehicle-driver
+    image: vehicle-driver-web
+    ports:
+      - '4400:4400'
+    environment:
+      GATEWAY_PORT:   "8040"
+    depends_on:
+      - gateway-service
+  
+    networks:
+      - vehicle-bridge-subnet            
+  zipkin-service:
+      image: openzipkin/zipkin
+      ports:
+        - '9411:9411'
+networks:
+    vehicle-bridge-subnet:
+      driver: bridge

@@ -1,0 +1,12 @@
+server:
+  port: 8040
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    config:
+      uri: http://config-server:8051,http://localhost:8051
+  
+ribbon:
+  ReadTimeout: 60000
