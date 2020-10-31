@@ -193,16 +193,21 @@ We applied the below workflow for this project:-
 
 		http://54.205.34.124/phpmyadmin
 - Travis :-
-     https://travis-ci.com/github/mhassaballah/VehicleManagment
+
+    	   	https://travis-ci.com/github/mhassaballah/VehicleManagment
      
 - Docker Hub :-
-        https://hub.docker.com/repository/docker/mhassaballahserviceuser/vehicle-simulator
+
+       		https://hub.docker.com/repository/docker/mhassaballahserviceuser/vehicle-simulator
 
 - Vehicle Service :-
-      http://localhost:8091/vehicles/
+
+      		http://localhost:8091/vehicles/
       
 - Customer Service :-
-     http://localhost:8060/customers/
+
+    		http://localhost:8060/customers/
     
 - Frontend URL :-
-     http://localhost:4400/
+
+     		http://localhost:4400/
