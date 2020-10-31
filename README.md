@@ -178,13 +178,13 @@ We applied the below workflow for this project:-
      
 	 1- maven
 		
-    	 	 cd VehicleManagment 
-    		 mvn clean install
+    	    cd VehicleManagment 
+            mvn clean install
     
 	 2- docker-compose
 	 
-    			cd VehicleManagment
-    			docker-compose up
+    	    cd VehicleManagment
+    	    docker-compose up
 
 
 ### Important endpoints:-
@@ -192,4 +192,17 @@ We applied the below workflow for this project:-
 - phpmyadmin:-
 
 		http://54.205.34.124/phpmyadmin
+- Travis :-
+     https://travis-ci.com/github/mhassaballah/VehicleManagment
+     
+- Docker Hub :-
+        https://hub.docker.com/repository/docker/mhassaballahserviceuser/vehicle-simulator
 
+- Vehicle Service :-
+      http://localhost:8091/vehicles/
+      
+- Customer Service :-
+     http://localhost:8060/customers/
+    
+- Frontend URL :-
+     http://localhost:4400/
