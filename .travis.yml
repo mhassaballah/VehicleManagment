@@ -14,7 +14,7 @@ matrix:
     #  -DEUREKA_URI=http://localhost:8071/eureka
     
     - cd ../gateway-service
-    - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin
+    - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin -Dspring.profiles.active=stage
 
     
     - cd ../customer-service
@@ -26,7 +26,7 @@ matrix:
   
     
     - cd ../vehicle-simulator
-    - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin
+    - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin -Dspring.profiles.active=stage
    
     
     
@@ -40,7 +40,7 @@ matrix:
     - npm install -g @angular/cli
     script:
     - ng build --prod
-    
+
 cache:
   directories:
   - "$HOME/.m2"
