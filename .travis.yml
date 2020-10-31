@@ -4,42 +4,60 @@ matrix:
     jdk: oraclejdk8
     install: true
     dist: trusty
-  
+    services:
+    - docker
+    before_script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS
     script:
     - cd config-server
     - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin
-    
+    - docker build  -t $DOCKER_USER/config-server:latest    -t $DOCKER_USER/config-server:$TRAVIS_BUILD_ID  .
+    - docker push $DOCKER_USER/config-server
     #- cd ../registry
     #- mvn clean install -B -Djasypt.encryptor.password=altenpass@admin
     #  -DEUREKA_URI=http://localhost:8071/eureka
+    #- docker build  -t $DOCKER_USER/registry-server:latest    -t $DOCKER_USER/registry-server:$TRAVIS_BUILD_ID  .
+    #- docker push $DOCKER_USER/registry-server
     
     - cd ../gateway-service
     - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin -Dspring.profiles.active=stage
-
+    - docker build  -t $DOCKER_USER/gateway-service:latest    -t $DOCKER_USER/gateway-service:$TRAVIS_BUILD_ID  .
+    - docker push $DOCKER_USER/gateway-service
+    
     
     - cd ../customer-service
     - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin
-    
+    - docker build  -t $DOCKER_USER/customer-service:latest    -t $DOCKER_USER/customer-service:$TRAVIS_BUILD_ID  .
+    - docker push $DOCKER_USER/customer-service
     
     - cd ../vehicle-service
     - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin
-  
+    - docker build  -t $DOCKER_USER/vehicle-service:latest    -t $DOCKER_USER/vehicle-service:$TRAVIS_BUILD_ID  .
+    - docker push $DOCKER_USER/vehicle-service
     
     - cd ../vehicle-simulator
     - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin -Dspring.profiles.active=stage
-   
+    - docker build  -t $DOCKER_USER/vehicle-simulator:latest    -t $DOCKER_USER/vehicle-simulator:$TRAVIS_BUILD_ID  .
+    - docker push $DOCKER_USER/vehicle-simulator 
+    
     
     
   - language: node_js
     node_js:
     - '11.5'
- 
+    services:
+    - docker
     before_install:
     - cd vehicle-driver
     before_script:
     - npm install -g @angular/cli
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS
+
     script:
     - ng build --prod
+    after_success:
+    - docker build  -t $DOCKER_USER/vehicle-driver:latest    -t $DOCKER_USER/vehicle-driver:$TRAVIS_BUILD_ID  .
+    - docker push $DOCKER_USER/vehicle-driver
 
 cache:
   directories:
