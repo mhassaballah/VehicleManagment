@@ -32,19 +32,19 @@
 		 - An overview of all vehicles should be visible on one page (full-screen display), together with their status.
 		 - It should be able to filter, to only show vehicles for a specific customer.
 		 - It should be able to filter, to only show vehicles that have a specific status.
-	2. Random simulation to vehicles status sending.
-	3. If database design will consume a lot of time, use data in-memory representation.
-	4. Unit Testing.
-	5. .NET Core, Java or any language you feel comfortable with.
-	6. Complete analysis for the problem.
+   2. Random simulation to vehicles status sending.
+   3. If database design will consume a lot of time, use data in-memory representation.
+   4. Unit Testing.
+   5. .NET Core, Java or any language you feel comfortable with.
+   6. Complete analysis for the problem.
 		 - Full architectural sketch to solution.
 		 - Analysis behind the solution design, technologies....
 		 - How to run your solution.
-	7. Use CI (Travis, Circle, TeamCity...) to verify your code (Static analysis,..) and tests.
-	8. Dockerize the whole solution.
-	9. Use Microservices architecture.
+   7. Use CI (Travis, Circle, TeamCity...) to verify your code (Static analysis,..) and tests.
+   8. Dockerize the whole solution.
+   9. Use Microservices architecture.
 		- Use any Microservices Chassis Framework.
-	10. Use any free tier on any cloud platform like: - AWS, Azure or GCP
+   10. Use any free tier on any cloud platform like: - AWS, Azure or GCP
 
 #### Optional Requirements
   1. Write an integration test.
@@ -97,11 +97,10 @@
 			    Spring Data Module, Spring MVC Module, Spring Cloud Stack,Spring Jasypt
 				(Encryption), Junit, Spring Test, h2 and mockito.
                 
-  4-  Config Service:- manage all configurations that used by the application and read
-   the configuration from private github repository.
+  4-  Config Service:- manage all configurations that used by the application and read the configuration from private github repository.
    
-			- It is built using Spring boot and we are using the below modules :-
-			    Spring Cloud Stack,Spring jasypt.
+	- It is built using Spring boot and we are using the below modules :-
+			 Spring Cloud Stack,Spring jasypt.
   5-  Registry Service: it is a registration repository that every service will register itself by the name.
   
 			  - It is built using Spring boot and we are using the below modules :-
