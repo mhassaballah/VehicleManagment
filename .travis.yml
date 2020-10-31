@@ -1,0 +1,48 @@
+matrix:
+  include:
+  - language: java
+    jdk: oraclejdk8
+    install: true
+    dist: trusty
+  
+    script:
+    - cd config-server
+    - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin
+    
+    #- cd ../registry
+    #- mvn clean install -B -Djasypt.encryptor.password=altenpass@admin
+    #  -DEUREKA_URI=http://localhost:8071/eureka
+    
+    - cd ../gateway-service
+    - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin
+
+    
+    - cd ../customer-service
+    - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin
+    
+    
+    - cd ../vehicle-service
+    - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin
+  
+    
+    - cd ../vehicle-simulator
+    - mvn clean install -B -Djasypt.encryptor.password=altenpass@admin
+   
+    
+    
+  - language: node_js
+    node_js:
+    - '11.5'
+ 
+    before_install:
+    - cd vehicle-driver
+    before_script:
+    - npm install -g @angular/cli
+    script:
+    - ng build --prod
+    
+cache:
+  directories:
+  - "$HOME/.m2"
+  - "$HOME/.cache"
+  - "./node_modules"
